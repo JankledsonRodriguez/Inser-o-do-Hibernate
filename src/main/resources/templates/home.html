@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gestão de Cozinha - Aulas e Estoque</title>
+
+<link rel="stylesheet" th:href="@{/styles/style2.css}">
+
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+<img src="https://assets.b9.com.br/wp-content/uploads/2012/08/023.jpg"
+alt="Logo Senac"
+class="logo-img">
+</div>
+
+
+<nav class="nav-links">
+
+<a href="#" class="active">Dashboard</a>
+
+<a href="#">Aulas</a>
+
+<a href="#">Estoque</a>
+
+<a href="#">Relatórios</a>
+
+<a href="#" class="btn-nav">Sair</a>
+
+</nav>
+
+</header>
+
+
+
+<main class="main-container">
+
+
+
+<!-- RESUMO -->
+
+<section class="dashboard-summary">
+
+
+<div class="status-card">
+
+<h3>Aulas Agendadas</h3>
+
+<p class="numero-destaque">12</p>
+
+</div>
+
+
+
+<div class="status-card alerta">
+
+<h3>Itens Pendentes</h3>
+
+<p class="numero-destaque">6</p>
+
+</div>
+
+
+
+<div class="status-card sucesso">
+
+<h3>Recebimentos Confirmados</h3>
+
+<p class="numero-destaque">18</p>
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<div class="estoque-grid">
+
+
+
+<!-- CADASTRAR AULA -->
+
+<section class="card-feature">
+
+
+<h3>Agendar Nova Aula</h3>
+
+
+<p>
+Cadastre a aula prática, data e ingredientes necessários.
+</p>
+
+
+
+<form>
+
+
+<label>Nome da Aula</label>
+
+<input type="text"
+placeholder="Ex: Massas Italianas">
+
+
+
+<label>Data da Aula</label>
+
+<input type="date">
+
+
+
+<label>Horário</label>
+
+<input type="time">
+
+
+
+<label>Professor / Responsável</label>
+
+<input type="text"
+placeholder="Nome do responsável">
+
+
+
+<label>Observações</label>
+
+<textarea placeholder="Informações da aula"></textarea>
+
+
+
+
+<button class="btn-principal">
+
+Salvar Aula
+
+</button>
+
+
+</form>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- LISTA DE AULAS -->
+
+<section class="card-feature">
+
+
+<h3>Aulas Cadastradas</h3>
+
+
+<div class="table-wrapper">
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Aula</th>
+
+<th>Data</th>
+
+<th>Status</th>
+
+<th>Ação</th>
+
+
+</tr>
+
+</thead>
+
+
+
+
+<tbody>
+
+
+<tr>
+
+<td>Confeitaria Básica</td>
+
+<td>25/08/2026</td>
+
+
+<td>
+<span class="status">
+Agendada
+</span>
+</td>
+
+
+<td>
+
+
+<button class="btn-confirmar">
+
+Confirmar
+
+</button>
+
+
+
+<button class="btn-editar">
+
+Alterar
+
+</button>
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+<tr>
+
+
+<td>Culinária Italiana</td>
+
+<td>30/08/2026</td>
+
+
+<td>
+
+<span class="status alterado">
+
+Alterada
+
+</span>
+
+</td>
+
+
+<td>
+
+
+<button class="btn-confirmar">
+
+Confirmar
+
+</button>
+
+
+
+<button class="btn-editar">
+
+Alterar
+
+</button>
+
+
+</td>
+
+
+
+</tr>
+
+
+
+</tbody>
+
+
+</table>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- RECEBIMENTO DE INSUMOS -->
+
+
+<section class="card-feature recebimento">
+
+
+<h3>Recebimento de Itens da Aula</h3>
+
+
+<p>
+Confirme os ingredientes recebidos para a aula selecionada.
+</p>
+
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Ingrediente</th>
+
+<th>Quantidade</th>
+
+<th>Recebido</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody>
+
+
+<tr>
+
+
+<td>Farinha de Trigo</td>
+
+<td>5 Kg</td>
+
+<td>
+
+<button class="btn-confirmar">
+
+✓ Confirmar
+
+</button>
+
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+
+<td>Chocolate</td>
+
+<td>3 Kg</td>
+
+<td>
+
+<button class="btn-confirmar">
+
+✓ Confirmar
+
+</button>
+
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+
+<td>Leite</td>
+
+<td>10 Litros</td>
+
+<td>
+
+<button class="btn-confirmar">
+
+✓ Confirmar
+
+</button>
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+</section>
+
+
+
+
+
+
+</main>
+
+<script th:src="@{/scripts/script.js}"></script>
+</body>
+
+</html>
