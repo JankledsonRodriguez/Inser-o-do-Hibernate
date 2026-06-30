@@ -1,6 +1,7 @@
 package com.example.primeiroAppSpring.controller;
 
 import com.example.primeiroAppSpring.model.UsuarioForm;
+import com.example.primeiroAppSpring.service.UsuarioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class UsuarioController {
+    private final UsuarioService usuarioService;
+
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
     @GetMapping("/cadastro")
     public String exibirCadastro(Model model){
         model.addAttribute("usuarioForm",new UsuarioForm());
@@ -23,13 +30,14 @@ public class UsuarioController {
 
     @PostMapping("/cadastro")
     public String processarCadastro(@ModelAttribute UsuarioForm form, Model model){
-        if (!form.getSenha().equals(form.getConfirmarSenha())){
-            model.addAttribute("erro","ERRO, as senhas não conferem");
+        String erro = usuarioService.cadastrar(form);
+
+        if(erro!=null){
+            model.addAttribute("erro", erro);
+            model.addAttribute("usuarioform",form);
+
             return "cadastro";
         }
-        IO.println("Usuário criado com sucesso");
-        IO.println(form.getNome()+" "+form.getEmail());
-
         return "redirect:/login";
     }
 
