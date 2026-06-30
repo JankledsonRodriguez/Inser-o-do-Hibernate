@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
     @Autowired
@@ -33,4 +35,14 @@ public class UsuarioService {
 
         return null;
     }
+
+    public Usuario autenticar (String email, String senha){
+        Optional<Usuario> resultado = usuarioRepository.findByEmail(email);
+
+        if (resultado.isEmpty()){
+
+        }
+        return null;
+    }
+
 }
