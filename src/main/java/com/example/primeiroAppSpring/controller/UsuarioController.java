@@ -1,5 +1,6 @@
 package com.example.primeiroAppSpring.controller;
 
+import com.example.primeiroAppSpring.model.Usuario;
 import com.example.primeiroAppSpring.model.UsuarioForm;
 import com.example.primeiroAppSpring.service.UsuarioService;
 import org.springframework.stereotype.Controller;
@@ -53,14 +54,13 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public String processarLogin(@ModelAttribute UsuarioForm form, Model model){
-        if (form.getEmail().endsWith ("@df.senac.br")){
-            return "redirect:/";
+    public String processarLogin(@ModelAttribute UsuarioForm form, Model model) {
+        Usuario usuario = usuarioService.autenticar(form.getEmail(), form.getSenha());
+        if(usuario == null){
+            model.addAttribute("erro", "E-mail ou senha incorreto!");
+            return "login";
         }
-        model.addAttribute("erro", "E-mail ou senha inválidos");
-        IO.println(form.getNome()+" "+form.getEmail());
-
-        return "login";
+        return "redirect:/";
     }
 
 
@@ -78,12 +78,12 @@ public class UsuarioController {
 
     @PostMapping("/alterar-senha")
     public String processarAlterarSenha(@ModelAttribute UsuarioForm form, Model model){
-        if (!form.getSenha().equals(form.getConfirmarSenha())){
-            model.addAttribute("erro","ERRO, as senhas não conferem");
-            return "alterar-senha";
-        }
+        String erro  = usuarioService.alterarSenha(form);
 
-        model.addAttribute("SUCESSO!", " Senha alterada com SUCESSO!");
+        if (erro!=null){
+            model.addAttribute("erro",erro);
+            return "alterarSenha";
+        }
 
         return "redirect:/login";
     }

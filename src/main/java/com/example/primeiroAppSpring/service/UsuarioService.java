@@ -40,9 +40,31 @@ public class UsuarioService {
         Optional<Usuario> resultado = usuarioRepository.findByEmail(email);
 
         if (resultado.isEmpty()){
+            return null;
+    }
 
-        }
+    Usuario usuario = resultado.get();
+    if (!encoder.matches(senha, usuario.getSenha())){
         return null;
     }
 
+    return usuario;
+
+}
+
+    public String alterarSenha (UsuarioForm form){
+        if(!form.getSenha().equals(form.getConfirmarSenha())){
+            return "as senhas não conferem";
+
+        }
+        Optional<Usuario> resultado = usuarioRepository.findByEmail(form.getEmail());
+        if(resultado.isEmpty()){
+            return "E-mail não encontrado";
+        }
+
+        Usuario usuario = resultado.get();
+        usuario.setSenha(encoder.encode(form.getSenha()));
+        usuarioRepository.save(usuario);
+        return null;
+    }
 }
